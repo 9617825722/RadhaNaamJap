@@ -1,0 +1,2318 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🌸 Radha Naam Jap Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, serif;
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(25, 5, 35, 0.68),
+                    rgba(55, 10, 65, 0.82)
+                ),
+                url("{% static 'images/backgrounds/home.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            transition: 0.4s;
+        }
+
+        body.light-theme {
+            color: #3d2140;
+
+            background:
+                linear-gradient(
+                    rgba(255, 240, 250, 0.78),
+                    rgba(245, 225, 245, 0.85)
+                ),
+                url("{% static 'images/backgrounds/home.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+
+        .navbar {
+            min-height: 75px;
+            padding: 0 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        body.light-theme .navbar {
+            background: rgba(255, 255, 255, 0.55);
+            border-bottom: 1px solid rgba(100, 40, 90, 0.20);
+        }
+
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+
+        .nav-btn,
+        .theme-button {
+            padding: 10px 20px;
+
+            color: white;
+            text-decoration: none;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            font-family: Georgia, serif;
+            font-size: 15px;
+
+            transition: 0.3s;
+        }
+
+
+        .theme-button {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+        body.light-theme .nav-btn,
+        body.light-theme .theme-button {
+            color: #70245f;
+            background: rgba(255, 255, 255, 0.60);
+            border-color: rgba(112, 36, 95, 0.20);
+        }
+
+
+        .nav-btn:hover,
+        .theme-button:hover {
+            background: white;
+            color: #70245f;
+            transform: translateY(-2px);
+        }
+
+
+        .logout {
+            background: rgba(255, 70, 90, 0.25);
+        }
+
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .flower {
+            font-size: 45px;
+        }
+
+
+        .welcome h1 {
+            font-size: 42px;
+            margin: 10px 0;
+        }
+
+
+        .welcome p {
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+
+        .card {
+            padding: 28px;
+            border-radius: 25px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.13);
+            backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.30);
+
+            transition: 0.4s;
+        }
+
+
+        body.light-theme .card {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: rgba(112, 36, 95, 0.18);
+            box-shadow: 0 15px 40px rgba(80, 30, 80, 0.15);
+        }
+
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+
+        .number {
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+
+        .main-card {
+            padding: 45px;
+            margin-bottom: 25px;
+        }
+
+
+        .jap-count {
+            font-size: 75px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+
+        .jap-button {
+            border: none;
+            padding: 15px 45px;
+
+            border-radius: 35px;
+
+            background: white;
+            color: #70245f;
+
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .jap-button:hover {
+            transform: scale(1.06);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+
+        .progress-box {
+            margin-top: 25px;
+        }
+
+
+        .progress-bar {
+            height: 15px;
+
+            background: rgba(255, 255, 255, 0.20);
+
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+
+        body.light-theme .progress-bar {
+            background: rgba(112, 36, 95, 0.15);
+        }
+
+
+        .progress {
+            height: 100%;
+            width: {{ record.progress }}%;
+
+            background: white;
+
+            border-radius: 20px;
+
+            transition: 0.3s;
+        }
+
+
+        body.light-theme .progress {
+            background: #70245f;
+        }
+
+
+        .progress-text {
+            margin-top: 8px;
+        }
+
+
+        .goal-message {
+            margin-top: 20px;
+            padding: 15px 20px;
+
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.30);
+
+            font-size: 17px;
+            font-weight: bold;
+
+            text-align: center;
+        }
+
+
+        body.light-theme .goal-message {
+            background: rgba(255, 255, 255, 0.65);
+            border-color: rgba(112, 36, 95, 0.20);
+        }
+
+
+        .target-form {
+            margin-top: 25px;
+        }
+
+
+        .target-input {
+            width: 180px;
+            padding: 12px;
+
+            border: none;
+            border-radius: 20px;
+
+            text-align: center;
+
+            font-size: 16px;
+        }
+
+
+        .target-button {
+            padding: 12px 25px;
+
+            border: none;
+            border-radius: 20px;
+
+            background: white;
+            color: #70245f;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        .level-section {
+            margin-bottom: 25px;
+        }
+
+
+        .level-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+
+        .level-subtitle {
+            text-align: center;
+            opacity: 0.85;
+            margin-bottom: 30px;
+        }
+
+
+        .level-progress-box {
+            margin-bottom: 30px;
+        }
+
+
+        .level-progress-bar {
+            height: 20px;
+
+            background: rgba(255, 255, 255, 0.20);
+
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+
+        body.light-theme .level-progress-bar {
+            background: rgba(112, 36, 95, 0.15);
+        }
+
+
+        .level-progress {
+            height: 100%;
+            width: {{ level_data.progress }}%;
+
+            background: white;
+
+            border-radius: 20px;
+
+            transition: 0.5s;
+        }
+
+
+        body.light-theme .level-progress {
+            background: #70245f;
+        }
+
+
+        .level-progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        .level-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+
+        .level-card {
+            padding: 30px 20px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.11);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+
+            transition: 0.4s;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        body.light-theme .level-card {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: rgba(112, 36, 95, 0.18);
+        }
+
+
+        .level-card:hover {
+            transform: translateY(-6px);
+        }
+
+
+        .level-card.current-card {
+            border: 2px solid rgba(255, 215, 0, 0.65);
+        }
+
+
+        .level-card.completed-card {
+            border: 2px solid rgba(70, 220, 120, 0.55);
+        }
+
+
+        .level-card.locked-card {
+            opacity: 0.65;
+        }
+
+
+        .level-icon {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+
+        .level-card h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+
+        .level-target {
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+
+        .level-status {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            border-radius: 20px;
+
+            font-weight: bold;
+        }
+
+
+        .completed {
+            background: rgba(50, 200, 100, 0.25);
+        }
+
+
+        .current {
+            background: rgba(255, 200, 50, 0.25);
+        }
+
+
+        .locked {
+            background: rgba(120, 120, 120, 0.25);
+        }
+
+
+        .level-button {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 11px 22px;
+
+            border-radius: 25px;
+
+            color: #70245f;
+
+            background: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .level-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255,255,255,0.20);
+        }
+
+
+        .locked-button {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+
+        .completion-message {
+            margin-top: 30px;
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: rgba(255, 215, 0, 0.20);
+
+            border: 1px solid rgba(255, 215, 0, 0.45);
+
+            animation: celebration 2s infinite alternate;
+        }
+
+
+        .completion-message h2 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+
+        .completion-message p {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+
+        @keyframes celebration {
+
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.015);
+            }
+
+        }
+
+
+        .final-completed {
+            margin-top: 30px;
+            padding: 30px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: rgba(255, 215, 0, 0.25);
+
+            border: 2px solid rgba(255, 215, 0, 0.55);
+
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.15);
+        }
+
+
+        .final-completed h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+
+        .final-completed p {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+
+        .mala-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+
+        .mala-card {
+            padding: 25px;
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.11);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+
+        body.light-theme .mala-card {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: rgba(112, 36, 95, 0.18);
+        }
+
+
+        .mala-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+
+        .timer-card {
+            padding: 40px;
+            margin-bottom: 25px;
+        }
+
+
+        .timer {
+            font-size: 65px;
+            font-weight: bold;
+
+            margin: 20px 0;
+        }
+
+
+        .time-select {
+            padding: 12px 20px;
+
+            border-radius: 20px;
+            border: none;
+
+            font-size: 16px;
+        }
+
+
+        .timer-buttons {
+            margin-top: 20px;
+
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+
+        .timer-button {
+            padding: 12px 25px;
+
+            border: none;
+            border-radius: 25px;
+
+            background: white;
+            color: #70245f;
+
+            font-family: Georgia, serif;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+
+        .feature {
+            padding: 28px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.11);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.22);
+
+            transition: 0.4s;
+        }
+
+
+        body.light-theme .feature {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: rgba(112, 36, 95, 0.18);
+        }
+
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+
+        .feature-button {
+            display: inline-block;
+
+            margin-top: 15px;
+            padding: 10px 22px;
+
+            border-radius: 25px;
+
+            color: white;
+            text-decoration: none;
+
+            background: rgba(255, 255, 255, 0.14);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            transition: 0.3s;
+        }
+
+
+        body.light-theme .feature-button {
+            color: #70245f;
+            background: rgba(255, 255, 255, 0.65);
+            border-color: rgba(112, 36, 95, 0.20);
+        }
+
+
+        .feature-button:hover {
+            background: white;
+            color: #70245f;
+        }
+
+
+        .statistics {
+            margin-top: 30px;
+            padding: 30px;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+
+        body.light-theme .statistics {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: rgba(112, 36, 95, 0.18);
+        }
+
+
+        .statistics h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .chart {
+            height: 250px;
+
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+
+            gap: 15px;
+        }
+
+
+        .bar-box {
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: end;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .bar {
+            width: 40px;
+            min-height: 5px;
+
+            background: white;
+
+            border-radius: 10px 10px 3px 3px;
+
+            display: flex;
+            align-items: start;
+            justify-content: center;
+
+            transition: 0.3s;
+        }
+
+
+        body.light-theme .bar {
+            background: #70245f;
+        }
+
+
+        .bar:hover {
+            transform: scale(1.08);
+        }
+
+
+        .bar span {
+            color: #70245f;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: -22px;
+        }
+
+
+        .bar-date {
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+
+        .quote {
+            margin-top: 30px;
+            padding: 30px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.20);
+        }
+
+
+        body.light-theme .quote {
+            background: rgba(255, 255, 255, 0.58);
+            border-color: rgba(112, 36, 95, 0.18);
+        }
+
+
+        .quote p {
+            font-size: 20px;
+            line-height: 1.7;
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            opacity: 0.7;
+        }
+
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .level-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .stats,
+            .features,
+            .mala-section {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h1 {
+                font-size: 32px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .navbar {
+                padding: 15px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-card {
+                padding: 30px 20px;
+            }
+
+            .jap-count {
+                font-size: 55px;
+            }
+
+            .timer {
+                font-size: 50px;
+            }
+
+            .target-input {
+                width: 140px;
+            }
+
+            .statistics {
+                padding: 20px;
+                overflow-x: auto;
+            }
+
+            .chart {
+                min-width: 450px;
+            }
+
+            .level-title {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="navbar">
+
+        <div class="logo">
+            🌸 Radha Naam Jap
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="{% url 'home' %}" class="nav-btn">
+                🏠 Home
+            </a>
+
+
+            <button
+                class="theme-button"
+                onclick="toggleTheme()"
+                id="themeButton"
+            >
+                🌙 Dark
+            </button>
+
+
+            <a href="{% url 'logout' %}" class="nav-btn logout">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="welcome">
+
+            <div class="flower">
+                🌸 🪷 🌸
+            </div>
+
+            <h1>
+                राधे राधे 🙏
+            </h1>
+
+            <p>
+                Welcome
+                {{ request.user.first_name|default:request.user.username }}
+            </p>
+
+        </div>
+
+
+        <div class="stats">
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🎯
+                </div>
+
+                <h2>
+                    Today's Target
+                </h2>
+
+                <div class="number">
+                    {{ record.target }}
+                </div>
+
+                <p>
+                    Naam Jap
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🏆
+                </div>
+
+                <h2>
+                    Total Jap
+                </h2>
+
+                <div class="number">
+                    {{ total_jap }}
+                </div>
+
+                <p>
+                    Times
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    📿
+                </div>
+
+                <h2>
+                    Today's Jap
+                </h2>
+
+                <div class="number" id="todayCount">
+                    {{ record.count }}
+                </div>
+
+                <p>
+                    Times
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🔥
+                </div>
+
+                <h2>
+                    Daily Streak
+                </h2>
+
+                <div class="number">
+                    {{ streak }}
+                </div>
+
+                <p>
+                    Days
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="mala-section">
+
+
+            <div class="mala-card">
+
+                <div class="card-icon">
+                    📿
+                </div>
+
+                <h2>
+                    Today's Mala
+                </h2>
+
+                <div class="mala-number">
+                    {{ today_mala }}
+                </div>
+
+                <p>
+                    108 Jap = 1 Mala
+                </p>
+
+            </div>
+
+
+            <div class="mala-card">
+
+                <div class="card-icon">
+                    🪷
+                </div>
+
+                <h2>
+                    Total Mala
+                </h2>
+
+                <div class="mala-number">
+                    {{ total_mala }}
+                </div>
+
+                <p>
+                    Total completed Mala
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="card main-card">
+
+
+            <div class="card-icon">
+                📿
+            </div>
+
+
+            <h2>
+                Today's Naam Jap
+            </h2>
+
+
+            <div class="jap-count" id="japCount">
+                {{ record.count }}
+            </div>
+
+
+            <p>
+                प्रेम और श्रद्धा के साथ राधा नाम का स्मरण करें।
+            </p>
+
+
+            <br>
+
+
+            <button
+                class="jap-button"
+                onclick="addJap()"
+            >
+                📿 +1 Radha Naam
+            </button>
+
+
+            <div class="progress-box">
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress"
+                        id="progressBar"
+                        style="width: {{ record.progress }}%;"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    class="progress-text"
+                    id="progressText"
+                >
+                    {{ record.count }} / {{ record.target }} completed
+                </div>
+
+
+                {% if record.count >= record.target %}
+
+                    <div class="goal-message">
+
+                        🎉 Congratulations!
+
+                        <br>
+
+                        Aaj ka Naam Jap target complete ho gaya!
+
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'set_target' %}"
+                class="target-form"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="number"
+                    name="target"
+                    class="target-input"
+                    min="1"
+                    value="{{ record.target }}"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="target-button"
+                >
+                    🎯 Set Target
+                </button>
+
+            </form>
+
+
+        </div>
+
+
+        <div class="card level-section">
+
+
+            <div class="level-title">
+                📿 Naam Jap Levels 🏆
+            </div>
+
+
+            <div class="level-subtitle">
+                🙏 Naam Jap ke saath apni spiritual journey ko aage badhayein
+            </div>
+
+
+            <div class="level-progress-box">
+
+
+                <div class="level-progress-bar">
+
+                    <div
+                        class="level-progress"
+                        style="width: {{ level_data.progress }}%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="level-progress-text">
+
+                    {{ level_data.level_name }}
+
+                    —
+
+                    {{ level_data.progress }}% Complete
+
+                </div>
+
+
+            </div>
+
+
+            <div class="level-cards">
+
+
+                <!-- LEVEL 1 -->
+
+                <div class="
+                    level-card
+                    {% if level_data.level_1_completed %}
+                        completed-card
+                    {% else %}
+                        current-card
+                    {% endif %}
+                ">
+
+
+                    <div class="level-icon">
+                        🌸
+                    </div>
+
+
+                    <h3>
+                        Level 1
+                    </h3>
+
+
+                    <div class="level-target">
+
+                        1 Crore Jap
+
+                        <br>
+
+                        1,00,00,000
+
+                    </div>
+
+
+                    {% if level_data.level_1_completed %}
+
+                        <div class="level-status completed">
+                            ✅ Completed
+                        </div>
+
+                        <br>
+
+                        <a
+                            href="{% url 'level_1' %}"
+                            class="level-button"
+                        >
+                            📖 Level 1 Content
+                        </a>
+
+                    {% else %}
+
+                        <div class="level-status current">
+                            📿 In Progress
+                        </div>
+
+                        <br>
+
+                        <a
+                            href="{% url 'level_1' %}"
+                            class="level-button"
+                        >
+                            🌸 Open Level 1
+                        </a>
+
+                    {% endif %}
+
+
+                </div>
+
+
+                <!-- LEVEL 2 -->
+
+                <div class="
+                    level-card
+                    {% if level_data.level_2_completed %}
+                        completed-card
+                    {% elif level_data.level_1_completed %}
+                        current-card
+                    {% else %}
+                        locked-card
+                    {% endif %}
+                ">
+
+
+                    <div class="level-icon">
+                        🪷
+                    </div>
+
+
+                    <h3>
+                        Level 2
+                    </h3>
+
+
+                    <div class="level-target">
+
+                        5 Crore Jap
+
+                        <br>
+
+                        5,00,00,000
+
+                    </div>
+
+
+                    {% if level_data.level_2_completed %}
+
+
+                        <div class="level-status completed">
+                            ✅ Completed
+                        </div>
+
+
+                        <br>
+
+
+                        <a
+                            href="{% url 'level_2' %}"
+                            class="level-button"
+                        >
+                            📖 Level 2 Content
+                        </a>
+
+
+                    {% elif level_data.level_1_completed %}
+
+
+                        <div class="level-status current">
+                            🔓 Unlocked
+                        </div>
+
+
+                        <br>
+
+
+                        <a
+                            href="{% url 'level_2' %}"
+                            class="level-button"
+                        >
+                            🪷 Open Level 2
+                        </a>
+
+
+                    {% else %}
+
+
+                        <div class="level-status locked">
+                            🔒 Locked
+                        </div>
+
+
+                        <br>
+
+
+                        <span class="level-button locked-button">
+                            🔒 Complete Level 1
+                        </span>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+                <!-- LEVEL 3 -->
+
+                <div class="
+                    level-card
+                    {% if level_data.level_3_completed %}
+                        completed-card
+                    {% elif level_data.level_2_completed %}
+                        current-card
+                    {% else %}
+                        locked-card
+                    {% endif %}
+                ">
+
+
+                    <div class="level-icon">
+                        🦚
+                    </div>
+
+
+                    <h3>
+                        Level 3
+                    </h3>
+
+
+                    <div class="level-target">
+
+                        7 Crore Jap
+
+                        <br>
+
+                        7,00,00,000
+
+                    </div>
+
+
+                    {% if level_data.level_3_completed %}
+
+
+                        <div class="level-status completed">
+                            ✅ Completed
+                        </div>
+
+
+                        <br>
+
+
+                        <a
+                            href="{% url 'level_3' %}"
+                            class="level-button"
+                        >
+                            📖 Level 3 Content
+                        </a>
+
+
+                    {% elif level_data.level_2_completed %}
+
+
+                        <div class="level-status current">
+                            🔓 Unlocked
+                        </div>
+
+
+                        <br>
+
+
+                        <a
+                            href="{% url 'level_3' %}"
+                            class="level-button"
+                        >
+                            🦚 Open Level 3
+                        </a>
+
+
+                    {% else %}
+
+
+                        <div class="level-status locked">
+                            🔒 Locked
+                        </div>
+
+
+                        <br>
+
+
+                        <span class="level-button locked-button">
+                            🔒 Complete Level 2
+                        </span>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+            {% if level_data.level_1_completed and not level_data.level_2_completed %}
+
+
+                <div class="completion-message">
+
+                    <h2>
+                        🎉🌸 Level 1 Completed! 🌸🎉
+                    </h2>
+
+
+                    <p>
+
+                        Aapne 1 Crore Naam Jap complete kar liya hai.
+
+                        <br>
+
+                        🙏 Level 2 ab unlock ho gaya hai.
+
+                    </p>
+
+
+                    <a
+                        href="{% url 'level_1' %}"
+                        class="level-button"
+                    >
+                        📖 Level 1 Content
+                    </a>
+
+
+                    <a
+                        href="{% url 'level_2' %}"
+                        class="level-button"
+                    >
+                        🪷 Continue Level 2
+                    </a>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+            {% if level_data.level_2_completed and not level_data.level_3_completed %}
+
+
+                <div class="completion-message">
+
+                    <h2>
+                        🎉🪷 Level 2 Completed! 🪷🎉
+                    </h2>
+
+
+                    <p>
+
+                        Aapne 5 Crore Naam Jap complete kar liya hai.
+
+                        <br>
+
+                        🙏 Level 3 ab unlock ho gaya hai.
+
+                    </p>
+
+
+                    <a
+                        href="{% url 'level_2' %}"
+                        class="level-button"
+                    >
+                        📖 Level 2 Content
+                    </a>
+
+
+                    <a
+                        href="{% url 'level_3' %}"
+                        class="level-button"
+                    >
+                        🦚 Continue Level 3
+                    </a>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+            {% if level_data.level_3_completed %}
+
+
+                <div class="final-completed">
+
+
+                    <h2>
+                        🎉🏆🦚 All 3 Levels Completed! 🦚🏆🎉
+                    </h2>
+
+
+                    <p>
+
+                        Aapne Radha Naam Jap ke teeno levels
+                        complete kar liye hain.
+
+                        <br><br>
+
+                        1 Crore ✅
+
+                        &nbsp;&nbsp;
+
+                        5 Crore ✅
+
+                        &nbsp;&nbsp;
+
+                        7 Crore ✅
+
+                    </p>
+
+
+                    <br>
+
+
+                    <a
+                        href="{% url 'level_3' %}"
+                        class="level-button"
+                    >
+                        📖 Level 3 Content
+                    </a>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <div class="card timer-card">
+
+
+            <div class="card-icon">
+                ⏱️
+            </div>
+
+
+            <h2>
+                Jap Timer
+            </h2>
+
+
+            <p>
+                Apna Jap session ka time set karein.
+            </p>
+
+
+            <br>
+
+
+            <select
+                id="timeSelect"
+                class="time-select"
+            >
+
+                <option value="1">
+                    1 Minute
+                </option>
+
+                <option value="5" selected>
+                    5 Minutes
+                </option>
+
+                <option value="10">
+                    10 Minutes
+                </option>
+
+                <option value="15">
+                    15 Minutes
+                </option>
+
+                <option value="30">
+                    30 Minutes
+                </option>
+
+            </select>
+
+
+            <div
+                class="timer"
+                id="timer"
+            >
+                05:00
+            </div>
+
+
+            <div class="timer-buttons">
+
+
+                <button
+                    class="timer-button"
+                    onclick="startTimer()"
+                >
+                    ▶ Start
+                </button>
+
+
+                <button
+                    class="timer-button"
+                    onclick="pauseTimer()"
+                >
+                    ⏸ Pause
+                </button>
+
+
+                <button
+                    class="timer-button"
+                    onclick="resetTimer()"
+                >
+                    🔄 Reset
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📅
+                </div>
+
+                <h2>
+                    Jap History
+                </h2>
+
+                <p>
+                    Apne Naam Jap ka daily record dekhein.
+                </p>
+
+                <a
+                    href="{% url 'jap_history' %}"
+                    class="feature-button"
+                >
+                    View History
+                </a>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🏆
+                </div>
+
+                <h2>
+                    Achievements
+                </h2>
+
+                <p>
+                    Apne Naam Jap milestones complete karein.
+                </p>
+
+                <a
+                    href="{% url 'achievements' %}"
+                    class="feature-button"
+                >
+                    View Achievements
+                </a>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📖
+                </div>
+
+                <h2>
+                    Naam Jap Info
+                </h2>
+
+                <p>
+                    Naam Jap ke baare mein jaankari padhein.
+                </p>
+
+                <a
+                    href="{% url 'naam_jap_info' %}"
+                    class="feature-button"
+                >
+                    Read Info
+                </a>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h2>
+                    My Profile
+                </h2>
+
+                <p>
+                    Apni profile information dekhein.
+                </p>
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="feature-button"
+                >
+                    View Profile
+                </a>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+                <h2>
+                    Daily Goal
+                </h2>
+
+                <p>
+                    Apna daily Naam Jap target set karein.
+                </p>
+
+                <a
+                    href="{% url 'daily_goal' %}"
+                    class="feature-button"
+                >
+                    Set Daily Goal
+                </a>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⚙️
+                </div>
+
+                <h2>
+                    Settings
+                </h2>
+
+                <p>
+                    Account settings manage karein.
+                </p>
+
+                <a
+                    href="{% url 'settings' %}"
+                    class="feature-button"
+                >
+                    Open Settings
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="statistics">
+
+            <h2>
+                📊 Last 7 Days Naam Jap
+            </h2>
+
+
+            <div class="chart">
+
+
+                {% for item in stats %}
+
+
+                    <div class="bar-box">
+
+
+                        <div
+                            class="bar"
+                            style="height: {{ item.height }}px;"
+                        >
+
+                            <span>
+                                {{ item.count }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="bar-date">
+                            {{ item.date }}
+                        </div>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="quote">
+
+            <p>
+                "राधा नाम का स्मरण भक्ति और प्रेम की भावना को बढ़ाने वाली साधना के रूप में माना जाता है।"
+            </p>
+
+
+            <br>
+
+
+            <span>
+                🌺 राधे राधे 🌺
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        © 2026 Radha Naam Jap | 🙏 राधे राधे 🙏
+
+    </footer>
+
+
+    <script>
+
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("light-theme");
+
+            if (
+                document.body.classList.contains("light-theme")
+            ) {
+
+                localStorage.setItem(
+                    "theme",
+                    "light"
+                );
+
+            } else {
+
+                localStorage.setItem(
+                    "theme",
+                    "dark"
+                );
+
+            }
+
+            updateThemeButton();
+
+        }
+
+
+        function updateThemeButton() {
+
+            const button =
+                document.getElementById("themeButton");
+
+
+            if (
+                document.body.classList.contains("light-theme")
+            ) {
+
+                button.innerText = "☀️ Light";
+
+            } else {
+
+                button.innerText = "🌙 Dark";
+
+            }
+
+        }
+
+
+        if (
+            localStorage.getItem("theme") === "light"
+        ) {
+
+            document.body.classList.add(
+                "light-theme"
+            );
+
+        }
+
+
+        updateThemeButton();
+
+
+        function getCookie(name) {
+
+            let cookieValue = null;
+
+
+            if (
+                document.cookie &&
+                document.cookie !== ''
+            ) {
+
+                const cookies =
+                    document.cookie.split(';');
+
+
+                for (
+                    let cookie of cookies
+                ) {
+
+                    cookie = cookie.trim();
+
+
+                    if (
+                        cookie.startsWith(
+                            name + '='
+                        )
+                    ) {
+
+                        cookieValue =
+                            decodeURIComponent(
+                                cookie.substring(
+                                    name.length + 1
+                                )
+                            );
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+
+            return cookieValue;
+
+        }
+
+
+        function addJap() {
+
+            fetch(
+                "{% url 'add_jap' %}",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "X-CSRFToken":
+                            getCookie("csrftoken")
+                    }
+                }
+            )
+
+            .then(response => {
+
+                if (response.ok) {
+
+                    location.reload();
+
+                }
+
+            });
+
+        }
+
+
+        let timerInterval;
+
+        let totalSeconds = 300;
+
+        let remainingSeconds = 300;
+
+
+        function updateTimer() {
+
+            let minutes =
+                Math.floor(
+                    remainingSeconds / 60
+                );
+
+
+            let seconds =
+                remainingSeconds % 60;
+
+
+            minutes =
+                String(minutes).padStart(
+                    2,
+                    "0"
+                );
+
+
+            seconds =
+                String(seconds).padStart(
+                    2,
+                    "0"
+                );
+
+
+            document.getElementById(
+                "timer"
+            ).innerText =
+                minutes + ":" + seconds;
+
+        }
+
+
+        function startTimer() {
+
+            if (timerInterval) {
+                return;
+            }
+
+
+            timerInterval =
+                setInterval(
+                    function() {
+
+
+                        if (
+                            remainingSeconds > 0
+                        ) {
+
+                            remainingSeconds--;
+
+                            updateTimer();
+
+                        } else {
+
+                            clearInterval(
+                                timerInterval
+                            );
+
+                            timerInterval = null;
+
+                            alert(
+                                "🌸 Jap session complete! 🌸"
+                            );
+
+                        }
+
+
+                    },
+                    1000
+                );
+
+        }
+
+
+        function pauseTimer() {
+
+            clearInterval(
+                timerInterval
+            );
+
+            timerInterval = null;
+
+        }
+
+
+        function resetTimer() {
+
+            clearInterval(
+                timerInterval
+            );
+
+            timerInterval = null;
+
+
+            let minutes =
+                parseInt(
+                    document.getElementById(
+                        "timeSelect"
+                    ).value
+                );
+
+
+            totalSeconds =
+                minutes * 60;
+
+
+            remainingSeconds =
+                totalSeconds;
+
+
+            updateTimer();
+
+        }
+
+
+        document
+            .getElementById("timeSelect")
+            .addEventListener(
+                "change",
+                resetTimer
+            );
+
+
+        resetTimer();
+
+
+    </script>
+
+
+</body>
+
+</html>

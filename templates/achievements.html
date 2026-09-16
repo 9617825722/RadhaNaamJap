@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Achievements</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #283593);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .summary {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .icon {
+            font-size: 45px;
+        }
+
+        .locked {
+            opacity: 0.45;
+        }
+
+        .status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        a {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 10px 25px;
+            background: white;
+            color: #6a1b9a;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>🏆 Achievements</h1>
+
+    <div class="summary">
+        <p>Total Jap: <strong>{{ total_jap }}</strong></p>
+        <p>Current Streak: <strong>{{ streak }} days</strong></p>
+    </div>
+
+    <div class="cards">
+
+        {% for achievement in achievements %}
+        <div class="card {% if not achievement.unlocked %}locked{% endif %}">
+
+            <div class="icon">{{ achievement.icon }}</div>
+
+            <h2>{{ achievement.title }}</h2>
+
+            <p>{{ achievement.description }}</p>
+
+            <div class="status">
+                {% if achievement.unlocked %}
+                    ✅ Unlocked
+                {% else %}
+                    🔒 Locked
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+</div>
+</body>
+</html>

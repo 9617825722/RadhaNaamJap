@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daily Goal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #283593);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: rgba(255,255,255,0.15);
+            padding: 35px;
+            border-radius: 25px;
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: white;
+            color: #6a1b9a;
+            font-weight: bold;
+        }
+
+        a {
+            display: block;
+            margin-top: 25px;
+            color: white;
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎯 Daily Goal</h1>
+
+    <p>Today's target: <strong>{{ record.target }}</strong></p>
+
+    {% for message in messages %}
+        <div class="message">{{ message }}</div>
+    {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input
+            type="number"
+            name="target"
+            value="{{ record.target }}"
+            min="1"
+            placeholder="Enter daily target"
+            required
+        >
+
+        <br>
+
+        <button type="submit">Save Goal</button>
+    </form>
+
+    <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

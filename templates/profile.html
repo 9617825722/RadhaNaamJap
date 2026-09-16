@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #283593);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .profile {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255,255,255,0.15);
+            padding: 35px;
+            border-radius: 25px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 12px;
+        }
+
+        .label {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        a {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 10px 25px;
+            background: white;
+            color: #6a1b9a;
+            text-decoration: none;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="profile">
+
+    <h1>👤 My Profile</h1>
+
+    <div class="item">
+        <div class="label">Name</div>
+        <strong>{{ request.user.first_name|default:"Not provided" }}</strong>
+    </div>
+
+    <div class="item">
+        <div class="label">Username</div>
+        <strong>{{ request.user.username }}</strong>
+    </div>
+
+    <div class="item">
+        <div class="label">Email</div>
+        <strong>{{ request.user.email|default:"Not provided" }}</strong>
+    </div>
+
+    <div class="item">
+        <div class="label">Total Jap</div>
+        <strong>{{ total_jap }}</strong>
+    </div>
+
+    <div class="item">
+        <div class="label">Current Streak</div>
+        <strong>{{ streak }} days</strong>
+    </div>
+
+    <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

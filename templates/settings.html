@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #283593);
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.15);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 11px 25px;
+            border: none;
+            border-radius: 25px;
+            background: white;
+            color: #6a1b9a;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .message {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        a {
+            display: block;
+            width: fit-content;
+            margin: 25px auto;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>⚙️ Settings</h1>
+
+    {% for message in messages %}
+        <div class="message">{{ message }}</div>
+    {% endfor %}
+
+    <div class="box">
+
+        <h2>👤 Profile Settings</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="action" value="profile">
+
+            <label>Name</label>
+            <input
+                type="text"
+                name="first_name"
+                value="{{ request.user.first_name }}"
+            >
+
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                value="{{ request.user.email }}"
+            >
+
+            <button type="submit">Save Profile</button>
+        </form>
+
+    </div>
+
+    <div class="box">
+
+        <h2>🔐 Change Password</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="action" value="password">
+
+            <input
+                type="password"
+                name="current_password"
+                placeholder="Current password"
+                required
+            >
+
+            <input
+                type="password"
+                name="new_password"
+                placeholder="New password"
+                required
+            >
+
+            <input
+                type="password"
+                name="confirm_password"
+                placeholder="Confirm new password"
+                required
+            >
+
+            <button type="submit">Change Password</button>
+        </form>
+
+    </div>
+
+    <a href="{% url 'dashboard' %}">← Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

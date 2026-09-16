@@ -1,0 +1,276 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🌸 Register - Radha Naam Jap</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Georgia, serif;
+            color: white;
+
+            background-image:
+                linear-gradient(
+                    rgba(20, 5, 30, 0.58),
+                    rgba(35, 5, 45, 0.75)
+                ),
+                url("{% static 'images/backgrounds/home.jpg' %}");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 500px;
+
+            padding: 40px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255, 255, 255, 0.28);
+
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            margin-bottom: 28px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 15px;
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+
+            outline: none;
+            font-size: 15px;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input:focus {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.20);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+
+            margin-top: 8px;
+
+            border: none;
+            border-radius: 30px;
+
+            background: white;
+            color: #70245f;
+
+            font-family: Georgia, serif;
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .message {
+            margin-bottom: 18px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .login-link {
+            margin-top: 22px;
+            font-size: 15px;
+        }
+
+        .login-link a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 18px;
+
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .register-card {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-card">
+
+    <div class="icon">
+        🌸 🪷 🌸
+    </div>
+
+    <h1>राधे राधे</h1>
+
+    <p class="subtitle">
+        🙏 Create your Radha Naam Jap account
+    </p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>🌸 Your Name</label>
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your name"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>👤 Username</label>
+            <input
+                type="text"
+                name="username"
+                placeholder="Choose a username"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>📧 Email</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>🔐 Password</label>
+            <input
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <label>🔐 Confirm Password</label>
+            <input
+                type="password"
+                name="confirm_password"
+                placeholder="Confirm your password"
+                required
+            >
+        </div>
+
+        <button type="submit" class="btn">
+            🌸 Create Account
+        </button>
+
+    </form>
+
+    <div class="login-link">
+        Already have an account?
+        <a href="{% url 'login' %}">Login here</a>
+    </div>
+
+    <a href="/" class="home-link">
+        ← Back to Home
+    </a>
+
+</div>
+
+</body>
+</html>
